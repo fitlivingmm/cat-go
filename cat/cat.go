@@ -20,6 +20,14 @@ func Init(domain string) {
 	aggregator.Background()
 }
 
+func SetConfigFile(configFile string) {
+	config.SetConfigFile(configFile)
+}
+
+func SetLogPath(logPaht string) {
+	config.SetLogPath(logPaht)
+}
+
 func enable() {
 	if atomic.SwapUint32(&isEnabled, 1) == 0 {
 		logger.Info("Cat has been enabled.")

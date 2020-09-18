@@ -34,6 +34,11 @@ type XMLConfigServer struct {
 	Port int    `xml:"port,attr"`
 }
 
+var (
+	defaultXmlFile = "./conf/client.xml"
+	defaultLogDir  = "./log"
+)
+
 var config = Config{
 	domain:   defaultAppKey,
 	hostname: defaultHostname,
@@ -136,4 +141,12 @@ func (config *Config) Init(domain string) (err error) {
 	}
 
 	return
+}
+
+func (config *Config) SetConfigFile(configFile string) {
+	defaultXmlFile = configFile
+}
+
+func (config *Config) SetLogPath(logPath string) {
+	defaultLogDir = logPath
 }
