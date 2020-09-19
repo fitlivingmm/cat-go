@@ -20,9 +20,13 @@ func Init(domain string) {
 	aggregator.Background()
 }
 
-func SetConfigFile(configFile string) {
-	config.SetConfigFile(configFile)
+func SetServerAddress(host string, port int) {
+	config.SetServerAddress(host, port)
 }
+
+//func SetConfigFile(configFile string) {
+//	config.SetConfigFile(configFile)
+//}
 
 func SetLogPath(logPaht string) {
 	config.SetLogPath(logPaht)

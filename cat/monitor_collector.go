@@ -94,6 +94,7 @@ func (c *cpuInfoCollector) GetProperties() map[string]string {
 		m["load.1min"] = f642str(avg.Load1)
 		m["load.5min"] = f642str(avg.Load5)
 		m["load.15min"] = f642str(avg.Load15)
+		m["goroutine.num"] = fmt.Sprintf("%d", runtime.NumGoroutine())
 		m["system.load.average"] = m["load.1min"]
 	}
 

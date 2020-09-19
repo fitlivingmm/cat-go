@@ -37,6 +37,8 @@ type XMLConfigServer struct {
 var (
 	defaultXmlFile = "./conf/client.xml"
 	defaultLogDir  = "./log"
+
+	defaultAddress = &serverAddress{}
 )
 
 var config = Config{
@@ -128,17 +130,17 @@ func (config *Config) Init(domain string) (err error) {
 		logger.Info("Hostname has been configured to %s", config.hostname)
 	}
 
-	var data []byte
-	if data, err = loadConfig(); err != nil {
-		return
-	}
+	//var data []byte
+	//if data, err = loadConfig(); err != nil {
+	//	return
+	//}
 
 	// Print config content to log file.
-	logger.Info("\n%s", data)
+	logger.Info("\n%s", config.httpServerAddresses)
 
-	if err = parseXMLConfig(data); err != nil {
-		return
-	}
+	//if err = parseXMLConfig(data); err != nil {
+	//	return
+	//}
 
 	return
 }
@@ -149,4 +151,9 @@ func (config *Config) SetConfigFile(configFile string) {
 
 func (config *Config) SetLogPath(logPath string) {
 	defaultLogDir = logPath
+}
+
+func (config *Config) SetServerAddress(host string, port int) {
+	info := serverAddress{host: host, port: port}
+	config.httpServerAddresses = append(config.httpServerAddresses, info)
 }

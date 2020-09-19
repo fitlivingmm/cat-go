@@ -16,7 +16,7 @@ var wg = sync.WaitGroup{}
 func init() {
 	cat.DebugOn()
 	cat.SetLogPath("./")
-	cat.SetConfigFile("./conf/client.xml")
+	cat.SetServerAddress("192.168.15.30", 2280)
 	cat.Init("gocat.v2")
 }
 
@@ -87,7 +87,7 @@ func case5() {
 func run(f func()) {
 	defer wg.Done()
 
-	for i := 0; i < 1; i++ {
+	for i := 0; i < 100000000; i++ {
 		f()
 		time.Sleep(time.Microsecond * 100)
 	}
