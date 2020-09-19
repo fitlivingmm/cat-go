@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/Meituan-Dianping/cat-go/message"
+	"github.com/fitlivingmm/cat-go/message"
 )
 
 type metricData struct {
@@ -18,7 +18,7 @@ type metricAggregator struct {
 	scheduleMixin
 	ch      chan *metricData
 	dataMap map[string]*metricData
-	ticker *time.Ticker
+	ticker  *time.Ticker
 }
 
 func (p *metricAggregator) GetName() string {

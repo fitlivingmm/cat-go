@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/Meituan-Dianping/cat-go/message"
+	"github.com/fitlivingmm/cat-go/message"
 )
 
 type eventData struct {
@@ -17,7 +17,7 @@ type eventAggregator struct {
 	scheduleMixin
 	ch      chan *message.Event
 	dataMap map[string]*eventData
-	ticker *time.Ticker
+	ticker  *time.Ticker
 }
 
 func (p *eventAggregator) GetName() string {
