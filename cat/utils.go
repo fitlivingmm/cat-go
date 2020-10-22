@@ -3,6 +3,8 @@ package cat
 import (
 	"fmt"
 	"net"
+	"runtime"
+	"strings"
 	"time"
 )
 
@@ -35,4 +37,33 @@ func ip2HexString(ip net.IP) string {
 
 func duration2Millis(duration time.Duration) int64 {
 	return duration.Nanoseconds() / time.Millisecond.Nanoseconds()
+}
+
+// SafeGo 错误处理go
+func SafeGo(fn func()) {
+	go func() {
+		defer SimpleRecover()
+		fn()
+	}()
+}
+
+func SimpleRecover() {
+	if err := recover(); err != nil {
+		stacks := DumpStacks(1, 10)
+		logger.Error("%s\n%s", err, stacks)
+		return
+	}
+	return
+}
+
+func DumpStacks(skip, max int) string {
+	var stacks []string
+	for i := skip; i <= max; i += 1 {
+		_, file, line, ok := runtime.Caller(i)
+		if !ok {
+			break
+		}
+		stacks = append(stacks, fmt.Sprintf("\t%s:%d", file, line))
+	}
+	return strings.Join(stacks, "\n")
 }

@@ -14,9 +14,18 @@ func Init(domain string) {
 	}
 	enable()
 
-	go background(&router)
-	go background(&monitor)
-	go background(&sender)
+	SafeGo(func() {
+		background(&router)
+	})
+
+	SafeGo(func() {
+		background(&monitor)
+	})
+
+	SafeGo(func() {
+		background(&sender)
+	})
+
 	aggregator.Background()
 }
 
